@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pomodoro-with-react/static/css/main.c8f125e7.css",
-    "main.js": "/pomodoro-with-react/static/js/main.caa0ca55.js",
+    "main.css": "/pomodoro-with-react/static/css/main.e91146e7.css",
+    "main.js": "/pomodoro-with-react/static/js/main.80a4b8a9.js",
     "static/js/787.1d815b40.chunk.js": "/pomodoro-with-react/static/js/787.1d815b40.chunk.js",
     "index.html": "/pomodoro-with-react/index.html",
-    "main.c8f125e7.css.map": "/pomodoro-with-react/static/css/main.c8f125e7.css.map",
-    "main.caa0ca55.js.map": "/pomodoro-with-react/static/js/main.caa0ca55.js.map",
+    "main.e91146e7.css.map": "/pomodoro-with-react/static/css/main.e91146e7.css.map",
+    "main.80a4b8a9.js.map": "/pomodoro-with-react/static/js/main.80a4b8a9.js.map",
     "787.1d815b40.chunk.js.map": "/pomodoro-with-react/static/js/787.1d815b40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c8f125e7.css",
-    "static/js/main.caa0ca55.js"
+    "static/css/main.e91146e7.css",
+    "static/js/main.80a4b8a9.js"
   ]
 }
