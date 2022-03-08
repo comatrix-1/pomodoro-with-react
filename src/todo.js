@@ -54,7 +54,7 @@ function Todo() {
       </div>
       {/* todos  */}
       <div className="my-4">
-        <p>&#127919; Tasks</p>
+        <p className="font-semibold">&#127919; Tasks</p>
         <div className="ml-4 flex flex-col gap-2 mt-2">
           {todos.map((todo) =>
             !todo.complete ? (
@@ -77,7 +77,7 @@ function Todo() {
       </div>
       {/* done  */}
       <div className="my-4">
-        <p>&#9989; Completed</p>
+        <p className="font-semibold">&#9989; Completed</p>
         <div className="ml-4 flex flex-col gap-2 mt-2">
           {todos.map((todo) =>
             todo.complete ? (
