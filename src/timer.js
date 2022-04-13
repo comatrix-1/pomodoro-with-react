@@ -3,6 +3,7 @@ import { useReducer, useEffect, useRef, useState } from "react";
 function Timer() {
   const [initialFocusSeconds, initialBreakSeconds] = [25 * 60, 5 * 60];
   const [customTimerMinutes, setCustomTimerMinutes] = useState(25);
+  const [customTimerSeconds, setCustomTimerSeconds] = useState(0);
 
   const [width, setWidth] = useState(40);
 
@@ -11,13 +12,23 @@ function Timer() {
     running: false,
     initial: true,
     mode: "focus",
-    focusSeconds: initialFocusSeconds,
-    breakSeconds: initialBreakSeconds,
+    alarmPlayed: false,
+    focus: {
+      seconds: initialFocusSeconds,
+      customSeconds: initialFocusSeconds,
+      alarmPlayed: false,
+    },
+    break: {
+      seconds: initialBreakSeconds,
+      customSeconds: initialBreakSeconds,
+      alarmPlayed: false,
+    },
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
       case "STARTPAUSE":
+        console.log("STARTPAUSE", state);
         if (!state.running) {
           return {
             ...state,
@@ -33,20 +44,30 @@ function Timer() {
         }
       case "RESET":
         if (state.mode === "focus") {
+          console.log("RESET - focus", state);
           return {
             ...state,
-            seconds: initialFocusSeconds,
-            focusSeconds: initialFocusSeconds,
-            running: false,
             initial: true,
+            running: false,
+            seconds: state.focus.customSeconds,
+            focus: {
+              ...state.focus,
+              seconds: state.focus.customSeconds,
+              alarmPlayed: false,
+            },
           };
         } else if (state.mode === "break") {
+          console.log("RESET - break", state);
           return {
             ...state,
-            seconds: initialBreakSeconds,
-            breakSeconds: initialBreakSeconds,
-            running: false,
             initial: true,
+            running: false,
+            seconds: state.break.customSeconds,
+            break: {
+              ...state.break,
+              seconds: state.break.customSeconds,
+              alarmPlayed: false,
+            },
           };
         } else {
           return state;
@@ -60,40 +81,88 @@ function Timer() {
         if (state.mode === "focus") {
           return state;
         } else {
+          console.log("SWITCHTOFOCUS", state);
           return {
             ...state,
+            // save the seconds in current mode
+            break: {
+              ...state.break,
+              seconds: state.seconds,
+            },
             mode: "focus",
-            breakSeconds: state.seconds,
-            seconds: state.focusSeconds,
+            running: false,
+            alarmPlayed: state.focus.alarmPlayed,
+            seconds: state.focus.seconds,
           };
         }
       case "SWITCHTOBREAK":
         if (state.mode === "break") {
           return state;
         } else {
+          console.log("SWITCHTOBREAK", state);
           return {
             ...state,
+            // save the seconds in current mode
+            focus: {
+              ...state.focus,
+              seconds: state.seconds,
+            },
             mode: "break",
-            focusSeconds: state.seconds,
-            seconds: state.breakSeconds,
+            running: false,
+            alarmPlayed: state.break.alarmPlayed,
+            seconds: state.break.seconds,
           };
         }
       case "CUSTOMTIMER":
         if (state.mode === "focus") {
+          console.log("CUSTOMTIMER FOCUS", state);
           return {
             ...state,
-            seconds: customTimerMinutes * 60,
-            focusSeconds: customTimerMinutes * 60,
+            seconds: customTimerMinutes * 60 + customTimerSeconds,
+            focus: {
+              ...state.focus,
+              seconds: customTimerMinutes * 60 + customTimerSeconds,
+              customSeconds: customTimerMinutes * 60 + customTimerSeconds,
+            },
           };
         } else if (state.mode === "break") {
+          console.log("CUSTOMTIMER BREAK", state);
           return {
             ...state,
-            seconds: customTimerMinutes * 60,
-            breakSeconds: customTimerMinutes * 60,
+            seconds: customTimerMinutes * 60 + customTimerSeconds,
+            break: {
+              ...state.break,
+              seconds: customTimerMinutes * 60 + customTimerSeconds,
+              customSeconds: customTimerMinutes * 60 + customTimerSeconds,
+            },
           };
         } else {
           return state;
         }
+      case "ALARMPLAYED":
+        if (state.mode === "focus") {
+          console.log("ALARMPLAYED focus", state);
+          return {
+            ...state,
+            running: false,
+            alarmPlayed: true,
+            focus: {
+              ...state.focus,
+              alarmPlayed: true,
+            },
+          };
+        } else if (state.mode === "break") {
+          console.log("ALARMPLAYED break", state);
+          return {
+            ...state,
+            running: false,
+            alarmPlayed: true,
+            break: {
+              ...state.break,
+              alarmPlayed: true,
+            },
+          };
+        } else return state;
       default:
         throw new Error();
     }
@@ -121,19 +190,30 @@ function Timer() {
         // <-- set tick ref current value
         dispatch({ type: "TICK" });
       }, 1000);
-    } else if (timer.seconds === 0 && !timer.initial) {
+    } else if (
+      timer.seconds === 0 &&
+      !timer.initial &&
+      ((timer.mode === "focus" && !timer.focus.alarmPlayed) ||
+        (timer.mode === "break" && !timer.break.alarmPlayed))
+    ) {
       pager.play();
+      dispatch({ type: "ALARMPLAYED" });
     } else {
       clearInterval(tick.current); // <-- access tick ref current value
     }
 
     return () => clearInterval(tick.current); // <-- clear on unmount!
-  }, [timer]);
+  }, [timer, pager]);
 
   useEffect(() => {
-    document.title = `${Math.floor(timer.seconds / 60)}min ${
-      timer.seconds % 60
-    }s`;
+    // document.title = `${Math.floor(timer.seconds / 60)}min ${
+    //   timer.seconds % 60
+    // }s`;
+    document.title = `${
+      timer.alarmPlayed
+        ? "Time's up! - "
+        : Math.floor(timer.seconds / 60) + "min" + (timer.seconds % 60) + "s"
+    } - Pomodoro timer`;
   }, [timer]);
 
   const buttonStyles =
@@ -201,13 +281,28 @@ function Timer() {
         </div>
         {/* customise timer  */}
         <div>
+          {/* minute input  */}
           <input
             type="number"
             value={customTimerMinutes}
             onChange={(e) => setCustomTimerMinutes(e.target.value)}
             style={{ width }}
+            className="text-right"
+            min="0"
+            max="59"
           />
-          <span className="mr-4"> min</span>
+          <span> min </span>
+          {/* seconds input  */}
+          <input
+            type="number"
+            value={customTimerSeconds}
+            onChange={(e) => setCustomTimerSeconds(e.target.value)}
+            style={{ width }}
+            className="text-right"
+            min="0"
+            max="59"
+          />
+          <span className="mr-4"> sec</span>
           <button
             className={`bg-green-primary mt-2 py-2 px-8 rounded cursor-pointer hover:bg-green-base duration-200`}
             onClick={customiseTimer}
