@@ -1,15 +1,20 @@
 {
   "name": "pomodoro2",
   "version": "0.1.0",
-  "homepage": "https://comatrix-1.github.io/pomodoro-with-react",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^28.1.5",
+    "@types/node": "^18.0.4",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
+    "typescript": "^4.7.4",
     "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"
   },

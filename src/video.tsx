@@ -1,18 +1,19 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { greenButtonStyles, textField } from "./customStyles";
 
 function Video() {
   const [videoId, setVideoId] = useState("");
-  const [newVideoId, setNewVideoId] = useState(null);
+  const [newVideoId, setNewVideoId] = useState("");
   const [videoIsVisible, setVideoIsVisible] = useState(false);
 
-  const retrieveVideo = (newVideoId) => {
+  const retrieveVideo = (newVideoId: string) => {
     setVideoId(`https://www.youtube-nocookie.com/embed/${newVideoId}`);
     setVideoIsVisible(true);
   };
 
   return (
     <>
-      <div className="flex flex-col gap-2 mb-6">
+      <div className="flex flex-col gap-2 mb-6 mt-12">
         <p className="text-xl font-semibold text-center">
           Play some music in the background &#127925;
         </p>
@@ -21,7 +22,7 @@ function Video() {
         </p>
         <div className="w-full flex">
           <input
-            className="border border-gray-primary py-1 w-full"
+            className={textField}
             type="text"
             placeholder="Insert video id here..."
             value={newVideoId}
@@ -29,7 +30,7 @@ function Video() {
           />
           <input
             type="button"
-            className="bg-green-primary py-2 px-8 ml-2 rounded cursor-pointer hover:bg-green-base duration-200"
+            className={`${greenButtonStyles} ml-2`}
             value="Get video"
             onClick={() => retrieveVideo(newVideoId)}
           />
