@@ -26,7 +26,7 @@ export const timerReducer = (state: ITimer, action: TimerAction) => {
       };
     case ActionTypes.SWITCH_MODE:
       if (state.mode === action.payload) {
-        return;
+        return state;
       } else {
         return {
           ...state,
