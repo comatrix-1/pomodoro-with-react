@@ -135,18 +135,22 @@ function Timer() {
 
           {/* buttons  */}
           <div className="flex justify-center gap-4 mt-2 sm:mt-4">
-            <button
-              onClick={() => dispatch({ type: ActionTypes.START_PAUSE })}
-              className={`${purpleButtonStyles}`}
-            >
-              {timer.running ? "PAUSE" : "START"}
-            </button>
-            <button
-              onClick={() => dispatch({ type: ActionTypes.RESET })}
-              className={`${purpleButtonStyles}`}
-            >
-              RESET
-            </button>
+            <div className="flex relative w-full">
+              <button
+                onClick={() => dispatch({ type: ActionTypes.START_PAUSE })}
+                className={`${purpleButtonStyles}`}
+              >
+                {timer.running ? "PAUSE" : "START"}
+              </button>
+            </div>
+            <div className="relative w-full">
+              <button
+                onClick={() => dispatch({ type: ActionTypes.RESET })}
+                className={`${purpleButtonStyles}`}
+              >
+                RESET
+              </button>
+            </div>
           </div>
           {/* customise timer  */}
           <div className="mt-2">
