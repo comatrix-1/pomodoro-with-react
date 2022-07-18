@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/pomodoro-with-react/static/css/main.5329e928.css",
-    "main.js": "/pomodoro-with-react/static/js/main.940c61b4.js",
+    "main.css": "/pomodoro-with-react/static/css/main.d6a45a3c.css",
+    "main.js": "/pomodoro-with-react/static/js/main.2c6d898a.js",
     "static/media/Fire_pager-jason-1283464858.mp3": "/pomodoro-with-react/static/media/Fire_pager-jason-1283464858.b413cf44ef5ae08d933f.mp3",
     "index.html": "/pomodoro-with-react/index.html",
-    "main.5329e928.css.map": "/pomodoro-with-react/static/css/main.5329e928.css.map",
-    "main.940c61b4.js.map": "/pomodoro-with-react/static/js/main.940c61b4.js.map"
+    "main.d6a45a3c.css.map": "/pomodoro-with-react/static/css/main.d6a45a3c.css.map",
+    "main.2c6d898a.js.map": "/pomodoro-with-react/static/js/main.2c6d898a.js.map"
   },
   "entrypoints": [
-    "static/css/main.5329e928.css",
-    "static/js/main.940c61b4.js"
+    "static/css/main.d6a45a3c.css",
+    "static/js/main.2c6d898a.js"
   ]
 }
