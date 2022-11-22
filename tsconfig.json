@@ -25,5 +25,5 @@
     "src/setupTests.ts",
     "src/tailwind.config.js"
   ],
-  "types": ["typePatches"]
+  "types": ["typePatches", "node"]
 }
