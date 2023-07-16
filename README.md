@@ -12,7 +12,7 @@ Github page is online at https://comatrix-1.github.io/pomodoro-with-react/
 - Expand the archive;
 - Open folder with the expanded archive;
 - Open index.html file;
-Bookmark for easy access!
+- Bookmark for easy access!
 
 # Manual installation
 Pull the main branch, edit package.json and set homepage property to "." if it isn't already. Then  "install" run "build" script e.g.
