@@ -8,10 +8,10 @@ A simple, lightweight pomodoro timer with 25 minute work and 5 minute break peri
 Github page is online at https://comatrix-1.github.io/pomodoro-with-react/
 
 # Download
-*Download [up-to-date version](https://github.com/comatrix-1/pomodoro-with-react/releases);
-*Expand the archive;
-*Open folder with the expanded archive;
-*Open index.html file;
+- Download [up-to-date version](https://github.com/comatrix-1/pomodoro-with-react/releases);
+- Expand the archive;
+- Open folder with the expanded archive;
+- Open index.html file;
 Bookmark for easy access!
 
 # Manual installation
