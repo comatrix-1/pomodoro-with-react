@@ -1,29 +1,23 @@
 {
   "compilerOptions": {
-    "outDir": "build",
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["es6", "dom"],
+    "outDir": "dist",
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "sourceMap": true,
     "esModuleInterop": true,
-    "allowJs": false,
-    "jsx": "react",
-    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "rootDir": "src",
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "skipLibCheck": true
   },
+  "include": ["src", "declaration.d.ts"],
   "exclude": [
     "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "src/tailwind.config.js"
-  ],
-  "types": ["typePatches", "node"]
+    "dist"
+  ]
 }
