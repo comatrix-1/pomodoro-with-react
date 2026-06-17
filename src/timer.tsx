@@ -9,7 +9,7 @@ function Timer() {
   const [initialFocusSeconds, initialBreakSeconds] = [25 * 60, 5 * 60];
   const [customTimerMinutes, setCustomTimerMinutes] = useState(25);
   const [customTimerSeconds, setCustomTimerSeconds] = useState(0);
-  const tick = useRef<NodeJS.Timer>(); // <-- React ref
+  const tick = useRef<ReturnType<typeof setInterval>>();
   const audioTune = useMemo(() => new Audio(pager), []);
   const initialTimer = {
     seconds: initialFocusSeconds,
