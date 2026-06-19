@@ -13,6 +13,7 @@ export const timerReducer = (state: ITimer, action: TimerAction) => {
         ...state,
         running: false,
         initial: true,
+        alarmPlayed: false,
         seconds:
           state.mode === Modes.FOCUS
             ? state.focus.customSeconds
